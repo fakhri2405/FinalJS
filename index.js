@@ -43,7 +43,7 @@ class TaskManager {
           return this.tasks;
         }
     }
-    
+
     sortTasks(criteria) {
         if (criteria === 'date') {
           return this.tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -52,4 +52,23 @@ class TaskManager {
           return this.tasks.sort((a, b) => a.title.localeCompare(b.title));
         }
     }
+}
+
+const manager = new TaskManager();
+const taskListElement = document.getElementById('taskList');
+
+function showTasks(tasks) {
+    taskListElement.innerHTML = '';
+
+    tasks.forEach(task => {
+      const taskDiv = document.createElement('div');
+      taskDiv.classList.add('task');
+      taskDiv.innerHTML = `
+        <input type="checkbox" ${task.completed ? 'checked' : ''}">
+        <span>${task.title}</span>
+        <button>Edit</button>
+        <button>Delete</button>
+      `;
+      taskListElement.appendChild(taskDiv);
+    });
 }
