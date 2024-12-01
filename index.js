@@ -36,6 +36,14 @@ class TaskManager {
       this.saveTasks();
     }
 
+    updateTask(taskId, updatedTask) {
+        const taskIndex = this.tasks.findIndex(task => task.id === taskId);
+        if (taskIndex !== -1) {
+          this.tasks[taskIndex] = updatedTask;
+          this.saveTasks();
+        }
+    }
+
     filterTasks(status) {
         if (status === 'completed') {
           return this.tasks.filter(task => task.completed);
@@ -70,7 +78,7 @@ function showTasks(tasks) {
       taskDiv.innerHTML = `
         <input type="checkbox" ${task.completed ? 'checked' : ''} onclick="toggleTaskStatus(${task.id})">
         <span>${task.title}</span>
-        <button>Edit</button>
+        <button onclick="editTask(${task.id})>Edit</button>
         <button onclick="deleteTask(${task.id})">Delete</button>
       `;
       taskListElement.appendChild(taskDiv);
@@ -87,6 +95,10 @@ function toggleTaskStatus(id) {
 function deleteTask(id) {
     manager.removeTask(id);
     showTasks(manager.filterTasks('all'));
+}
+
+function editTask(id) {
+
 }
 
 document.getElementById('addTaskBtn').addEventListener('click', () => {
