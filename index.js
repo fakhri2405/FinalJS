@@ -117,4 +117,15 @@ document.getElementById('filterByRemaining').addEventListener('click', () => {
     showTasks(manager.filterTasks('remaining'));
 });
 
+document.getElementById('taskFormElement').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const task = new Task(Date.now(), title, description, new Date().toLocaleString());
+    manager.addTask(task);
+    
+    document.getElementById('taskForm').classList.add('hidden');
+    showTasks(manager.filterTasks('all'));
+});
+
 showTasks(manager.filterTasks('all'));
