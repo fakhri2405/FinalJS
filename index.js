@@ -88,3 +88,9 @@ function deleteTask(id) {
     manager.removeTask(id);
     showTasks(manager.filterTasks('all'));
 }
+
+document.getElementById('addTaskBtn').addEventListener('click', () => {
+    document.getElementById('taskForm').classList.remove('hidden');
+});
+
+showTasks(manager.filterTasks('all'));
