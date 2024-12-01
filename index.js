@@ -6,6 +6,10 @@ class Task {
       this.createdAt = createdAt;
       this.completed = completed;
     }
+
+    toggleComplete() {
+        this.completed = !this.completed;
+    }
 }
 
 class TaskManager {
@@ -64,11 +68,23 @@ function showTasks(tasks) {
       const taskDiv = document.createElement('div');
       taskDiv.classList.add('task');
       taskDiv.innerHTML = `
-        <input type="checkbox" ${task.completed ? 'checked' : ''}">
+        <input type="checkbox" ${task.completed ? 'checked' : ''} onclick="toggleTaskStatus(${task.id})">
         <span>${task.title}</span>
         <button>Edit</button>
-        <button>Delete</button>
+        <button onclick="deleteTask(${task.id})">Delete</button>
       `;
       taskListElement.appendChild(taskDiv);
     });
+}
+
+function toggleTaskStatus(id) {
+    const task = manager.tasks.find(task => task.id === id);
+    task.toggleComplete();
+    manager.saveTasks();
+    showTasks(manager.filterTasks('all'));
+}
+
+function deleteTask(id) {
+    manager.removeTask(id);
+    showTasks(manager.filterTasks('all'));
 }
