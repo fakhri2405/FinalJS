@@ -43,4 +43,13 @@ class TaskManager {
           return this.tasks;
         }
     }
+
+    sortTasks(criteria) {
+        if (criteria === 'date') {
+          return this.tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+        else if (criteria === 'name') {
+          return this.tasks.sort((a, b) => a.title.localeCompare(b.title));
+        }
+    }
 }
