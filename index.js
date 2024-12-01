@@ -31,4 +31,16 @@ class TaskManager {
       this.tasks = this.tasks.filter(task => task.id !== taskId);
       this.saveTasks();
     }
+
+    filterTasks(status) {
+        if (status === 'completed') {
+          return this.tasks.filter(task => task.completed);
+        }
+        else if (status === 'remaining') {
+          return this.tasks.filter(task => !task.completed);
+        }
+        else {
+          return this.tasks;
+        }
+    }
 }
