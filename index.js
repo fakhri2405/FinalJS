@@ -93,4 +93,16 @@ document.getElementById('addTaskBtn').addEventListener('click', () => {
     document.getElementById('taskForm').classList.remove('hidden');
 });
 
+document.getElementById('filterByAll').addEventListener('click', () => {
+    showTasks(manager.filterTasks('all'));
+});
+
+document.getElementById('filterByCompleted').addEventListener('click', () => {
+    showTasks(manager.filterTasks('completed'));
+});
+
+document.getElementById('filterByRemaining').addEventListener('click', () => {
+    showTasks(manager.filterTasks('remaining'));
+});
+
 showTasks(manager.filterTasks('all'));
