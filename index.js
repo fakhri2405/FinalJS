@@ -102,7 +102,15 @@ function editTask(id) {
 }
 
 document.getElementById('addTaskBtn').addEventListener('click', () => {
-  document.getElementById('taskForm').classList.remove('hidden');
+  const taskForm = document.getElementById('taskForm');
+  taskForm.classList.add('visible');
+  taskForm.classList.remove('hidden');
+});
+
+document.getElementById('cancelBtn').addEventListener('click', () => {
+  const taskForm = document.getElementById('taskForm');
+  taskForm.classList.add('hidden');
+  taskForm.classList.remove('visible');
 });
 
 document.getElementById('filterByAll').addEventListener('click', () => {

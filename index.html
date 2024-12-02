@@ -9,29 +9,43 @@
 </head>
 <body>
   <div id="taskManager">
-    <h1>Task list</h1>
-    <button id="addTaskBtn">Add task</button>
-    <select id="sortSelect">
-      <option value="date">By date</option>
-      <option value="name">By name</option>
-    </select>
-    <div id="filters">
-      <button id="filterByAll">All</button>
-      <button id="filterByCompleted">Completed</button>
-      <button id="filterByRemaining">Remaining</button>
+    <div class="header">
+      <h1>Task Manager</h1>
+      <button id="addTaskBtn" class="btn primary">Add Task</button>
     </div>
-    <div id="taskList"></div>
+    
+    <div class="controls">
+      <select id="sortSelect" class="dropdown">
+        <option value="date">Sort by date</option>
+        <option value="name">Sort by name</option>
+      </select>
+      
+      <div id="filters" class="filter-buttons">
+        <button id="filterByAll" class="btn">All</button>
+        <button id="filterByCompleted" class="btn">Completed</button>
+        <button id="filterByRemaining" class="btn">Remaining</button>
+      </div>
+    </div>
+    
+    <div id="taskList" class="task-list"></div>
   </div>
 
   <div id="taskForm" class="hidden">
-    <h2 id="formTitle">Adding a task</h2>
-    <form id="taskFormElement">
-      <label for="title">Title:</label>
-      <input type="text" id="title" required>
-      <label for="description">Description:</label>
-      <input type="text" id="description" required>
-      <button type="submit">Add</button>
-    </form>
+    <div class="form-content">
+      <h2 id="formTitle">Add Task</h2>
+      <form id="taskFormElement">
+        <label for="title">Title</label>
+        <input type="text" id="title" required placeholder="Enter task title">
+        
+        <label for="description">Description</label>
+        <input type="text" id="description" required placeholder="Enter task description">
+        
+        <div class="form-buttons">
+          <button type="submit" class="btn primary">Add</button>
+          <button type="button" class="btn secondary" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </body>
 </html>
