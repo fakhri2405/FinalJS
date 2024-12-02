@@ -117,6 +117,12 @@ document.getElementById('filterByRemaining').addEventListener('click', () => {
   showTasks(manager.filterTasks('remaining'));
 });
 
+document.getElementById('sortSelect').addEventListener('change', (e) => {
+  const criteria = e.target.value;
+  const sortedTasks = manager.sortTasks(criteria);
+  showTasks(sortedTasks);
+});
+
 document.getElementById('taskFormElement').addEventListener('submit', (e) => {
   e.preventDefault();
   const title = document.getElementById('title').value;
