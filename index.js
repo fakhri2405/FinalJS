@@ -8,7 +8,7 @@ class Task {
   }
 
   toggleComplete() {
-      this.completed = !this.completed;
+    this.completed = !this.completed;
   }
 }
 
@@ -19,7 +19,7 @@ class TaskManager {
 
   loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks'));
-    return tasks ? tasks : [];
+    return tasks ? tasks.map(task => new Task(task.id, task.title, task.description, task.createdAt, task.completed)) : [];
   }
 
   saveTasks() {
@@ -37,32 +37,32 @@ class TaskManager {
   }
 
   updateTask(taskId, updatedTask) {
-      const taskIndex = this.tasks.findIndex(task => task.id === taskId);
-      if (taskIndex !== -1) {
-        this.tasks[taskIndex] = updatedTask;
-        this.saveTasks();
-      }
+    const taskIndex = this.tasks.findIndex(task => task.id === taskId);
+    if (taskIndex !== -1) {
+      this.tasks[taskIndex] = updatedTask;
+      this.saveTasks();
+    }
   }
 
   filterTasks(status) {
-      if (status === 'completed') {
-        return this.tasks.filter(task => task.completed);
-      }
-      else if (status === 'remaining') {
-        return this.tasks.filter(task => !task.completed);
-      }
-      else {
-        return this.tasks;
-      }
+    if (status === 'completed') {
+      return this.tasks.filter(task => task.completed);
+    }
+    else if (status === 'remaining') {
+      return this.tasks.filter(task => !task.completed);
+    }
+    else {
+      return this.tasks;
+    }
   }
 
   sortTasks(criteria) {
-      if (criteria === 'date') {
-        return this.tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      }
-      else if (criteria === 'name') {
-        return this.tasks.sort((a, b) => a.title.localeCompare(b.title));
-      }
+    if (criteria === 'date') {
+      return [...this.tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+    else if (criteria === 'name') {
+      return [...this.tasks].sort((a, b) => a.title.localeCompare(b.title));
+    }
   }
 }
 
@@ -87,18 +87,20 @@ function showTasks(tasks) {
 
 function toggleTaskStatus(id) {
   const task = manager.tasks.find(task => task.id === id);
-  task.toggleComplete();
-  manager.saveTasks();
-  showTasks(manager.filterTasks('all'));
+  if (task) {
+    task.toggleComplete();
+    manager.saveTasks();
+    showTasks(manager.filterTasks(currentFilter));
+  }
 }
 
 function deleteTask(id) {
   manager.removeTask(id);
-  showTasks(manager.filterTasks('all'));
+  showTasks(manager.filterTasks(currentFilter));
 }
 
 function editTask(id) {
-
+  window.location.href = `edit.html?id=${id}`;
 }
 
 document.getElementById('addTaskBtn').addEventListener('click', () => {
@@ -114,14 +116,17 @@ document.getElementById('cancelBtn').addEventListener('click', () => {
 });
 
 document.getElementById('filterByAll').addEventListener('click', () => {
+  currentFilter = 'all';
   showTasks(manager.filterTasks('all'));
 });
 
 document.getElementById('filterByCompleted').addEventListener('click', () => {
+  currentFilter = 'completed';
   showTasks(manager.filterTasks('completed'));
 });
 
 document.getElementById('filterByRemaining').addEventListener('click', () => {
+  currentFilter = 'remaining';
   showTasks(manager.filterTasks('remaining'));
 });
 
@@ -133,13 +138,19 @@ document.getElementById('sortSelect').addEventListener('change', (e) => {
 
 document.getElementById('taskFormElement').addEventListener('submit', (e) => {
   e.preventDefault();
-  const title = document.getElementById('title').value;
-  const description = document.getElementById('description').value;
+
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+
   const task = new Task(Date.now(), title, description, new Date().toLocaleString());
   manager.addTask(task);
-  
+
   document.getElementById('taskForm').classList.add('hidden');
-  showTasks(manager.filterTasks('all'));
+  showTasks(manager.filterTasks(currentFilter));
+
+  document.getElementById('taskFormElement').reset();
 });
 
-showTasks(manager.filterTasks('all'));
+let currentFilter = 'all';
+
+showTasks(manager.filterTasks(currentFilter));
