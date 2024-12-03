@@ -11,6 +11,7 @@ function showTasks(tasks) {
     taskDiv.innerHTML = `
       <input type="checkbox" ${task.completed ? 'checked' : ''} onclick="toggleTaskStatus(${task.id})">
       <span>${task.title}</span>
+      <button onclick="viewTaskDetails(${task.id})">Details</span>
       <button onclick="editTask(${task.id})">Edit</button>
       <button onclick="deleteTask(${task.id})">Delete</button>
     `;
@@ -34,6 +35,10 @@ function deleteTask(id) {
 
 function editTask(id) {
   window.location.href = `edit.html?id=${id}`;
+}
+
+function viewTaskDetails(id) {
+  window.location.href = `details.html?id=${id}`;
 }
 
 document.getElementById('addTaskBtn').addEventListener('click', () => {

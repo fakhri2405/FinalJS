@@ -118,14 +118,14 @@ button:hover {
 }
 
 .task button {
-    background-color: #f44336;
+    background-color: #7d7d7d;
     color: white;
     border-radius: 5px;
     margin: 5px;
 }
 
 .task button:hover {
-    background-color: #b82828;
+    background-color: #900faa;
 }
 
 .task span {
