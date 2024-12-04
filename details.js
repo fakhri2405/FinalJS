@@ -4,10 +4,15 @@ const taskId = parseInt(taskIdParam, 10);
 const manager = new TaskManager();
 const task = manager.tasks.find(t => t.id === taskId);
 
-document.getElementById('taskTitle').textContent = task.title;
-document.getElementById('taskDescription').textContent = task.description;
-document.getElementById('taskCreatedAt').textContent = task.createdAt;
-document.getElementById('taskStatus').textContent = task.completed ? 'Completed' : 'Remaining';
+if (!task) {
+  window.location.href = '404.html';
+}
+else {
+  document.getElementById('taskTitle').textContent = task.title;
+  document.getElementById('taskDescription').textContent = task.description;
+  document.getElementById('taskCreatedAt').textContent = task.createdAt;
+  document.getElementById('taskStatus').textContent = task.completed ? 'Completed' : 'Remaining';
+}
 
 document.getElementById('backBtn').addEventListener('click', () => {
   window.location.href = 'index.html';

@@ -186,3 +186,12 @@ input[type="text"] {
     opacity: 1;
     visibility: visible;
 }
+
+#notFoundContainer h2 {
+    color: #f44336;
+}
+
+#notFoundContainer p {
+    margin: 20px 0;
+    font-size: 1.2rem;
+}

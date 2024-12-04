@@ -4,8 +4,13 @@ const taskId = parseInt(taskIdParam, 10);
 const manager = new TaskManager();
 const task = manager.tasks.find(t => t.id === taskId);
 
-document.getElementById('title').value = task.title;
-document.getElementById('description').value = task.description;
+if (!task) {
+  window.location.href = '404.html';
+}
+else {
+  document.getElementById('title').value = task.title;
+  document.getElementById('description').value = task.description;
+}
 
 document.getElementById('taskFormElement').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -16,17 +21,17 @@ document.getElementById('taskFormElement').addEventListener('submit', (e) => {
   const titleRegex = /^(?!\d+$)(?!.*\s{2,})(?!^\s)(?!.*\s$)(?=.*\S)(?:(?:[A-Za-zА-Яа-яЁё]{1,16}|[0-9]{1,16})\s?){2,}$/;
   const descriptionRegex = /^.+$/;
 
-  if (!titleRegex.test(title)) {
+  if (!titleRegex.test(updatedTitle)) {
     alert('Invalid title');
     return;
   }
 
-  if (!descriptionRegex.test(description)) {
+  if (!descriptionRegex.test(updatedDescription)) {
     alert('Invalid description');
     return;
   }
 
-  if (description.toLowerCase() === title.toLowerCase()) {
+  if (updatedDescription.toLowerCase() === updatedTitle.toLowerCase()) {
     alert('Title and description are the same');
     return;
   }
