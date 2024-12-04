@@ -10,8 +10,8 @@ function showTasks(tasks) {
     taskDiv.classList.add('task');
     taskDiv.innerHTML = `
       <input type="checkbox" ${task.completed ? 'checked' : ''} onclick="toggleTaskStatus(${task.id})">
-      <span>${task.title}</span>
-      <button onclick="viewTaskDetails(${task.id})">Details</span>
+      <span onclick="viewTaskDetails(${task.id})" style="cursor: pointer;">${task.title}</span>
+      <button onclick="viewTaskDetails(${task.id})">Details</button>
       <button onclick="editTask(${task.id})">Edit</button>
       <button onclick="deleteTask(${task.id})">Delete</button>
     `;
@@ -25,6 +25,9 @@ function toggleTaskStatus(id) {
     task.toggleComplete();
     manager.saveTasks();
     showTasks(manager.filterTasks(currentFilter));
+  }
+  else {
+    alert(`Task with id ${id} not found`);
   }
 }
 
@@ -49,8 +52,8 @@ document.getElementById('addTaskBtn').addEventListener('click', () => {
 
 document.getElementById('cancelBtn').addEventListener('click', () => {
   const taskForm = document.getElementById('taskForm');
-  taskForm.classList.add('hidden');
   taskForm.classList.remove('visible');
+  taskForm.classList.add('hidden');
 });
 
 document.getElementById('filterByAll').addEventListener('click', () => {
@@ -101,7 +104,10 @@ document.getElementById('taskFormElement').addEventListener('submit', (e) => {
   const task = new Task(Date.now(), title, description, new Date().toLocaleString());
   manager.addTask(task);
 
-  document.getElementById('taskForm').classList.add('hidden');
+  const taskForm = document.getElementById('taskForm');
+  taskForm.classList.remove('visible');
+  taskForm.classList.add('hidden');
+
   showTasks(manager.filterTasks(currentFilter));
 
   document.getElementById('taskFormElement').reset();
