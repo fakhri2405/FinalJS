@@ -80,6 +80,24 @@ document.getElementById('taskFormElement').addEventListener('submit', (e) => {
   const title = document.getElementById('title').value.trim();
   const description = document.getElementById('description').value.trim();
 
+  const titleRegex = /^(?!\d+$)(?!.*\s{2,})(?!^\s)(?!.*\s$)(?=.*\S)(?:(?:[A-Za-zА-Яа-яЁё]{1,16}|[0-9]{1,16})\s?){2,}$/;
+  const descriptionRegex = /^.+$/;
+
+  if (!titleRegex.test(title)) {
+    alert('Invalid title');
+    return;
+  }
+
+  if (!descriptionRegex.test(description)) {
+    alert('Invalid description');
+    return;
+  }
+
+  if (description.toLowerCase() === title.toLowerCase()) {
+    alert('Title and description are the same');
+    return;
+  }
+
   const task = new Task(Date.now(), title, description, new Date().toLocaleString());
   manager.addTask(task);
 
