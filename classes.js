@@ -10,8 +10,8 @@ class Task {
     toggleComplete() {
       this.completed = !this.completed;
     }
-  }
-  
+}
+
 class TaskManager {
     constructor() {
       this.tasks = this.loadTasks();
