@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Edit Task</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="classes.js" defer></script>
-  <script src="edit.js" defer></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Edit Task</title>
+	<link rel="stylesheet" href="index.css">
+	<script src="classes.js" defer></script>
+	<script src="edit.js" defer></script>
 </head>
+
 <body>
-  <div id="editTaskContainer" class="form-content">
-    <h2 id="formTitle">Edit Task</h2>
-    <form id="taskFormElement">
-      <label for="title">Title</label>
-      <input type="text" id="title" required placeholder="Enter task title">
+	<div id="editTaskContainer" class="form-content">
+		<h2 id="formTitle">Edit Task</h2>
+		<form id="taskFormElement">
+			<label for="title">Title</label>
+			<input type="text" id="title" required placeholder="Enter task title">
 
-      <label for="description">Description</label>
-      <input type="text" id="description" required placeholder="Enter task description">
+			<label for="description">Description</label>
+			<input type="text" id="description" required placeholder="Enter task description">
 
-      <div class="form-buttons">
-        <button type="submit" class="btn primary">Save Changes</button>
-        <button type="button" id="backBtn" class="btn secondary">Back</button>
-      </div>
-    </form>
-  </div>
+			<div class="form-buttons">
+				<button type="submit" class="btn primary">Save Changes</button>
+				<button type="button" id="backBtn" class="btn secondary">Back</button>
+			</div>
+		</form>
+	</div>
 </body>
+
 </html>

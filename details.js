@@ -5,15 +5,15 @@ const manager = new TaskManager();
 const task = manager.tasks.find(t => t.id === taskId);
 
 if (!task) {
-  window.location.href = '404.html';
+	window.location.href = '404.html';
 }
 else {
-  document.getElementById('taskTitle').textContent = task.title;
-  document.getElementById('taskDescription').textContent = task.description;
-  document.getElementById('taskCreatedAt').textContent = task.createdAt;
-  document.getElementById('taskStatus').textContent = task.completed ? 'Completed' : 'Remaining';
+	document.getElementById('taskTitle').textContent = task.title;
+	document.getElementById('taskDescription').textContent = task.description;
+	document.getElementById('taskCreatedAt').textContent = task.createdAt;
+	document.getElementById('taskStatus').textContent = task.completed ? 'Completed' : 'Remaining';
 }
 
 document.getElementById('backBtn').addEventListener('click', () => {
-  window.location.href = 'index.html';
+	window.location.href = 'index.html';
 });
